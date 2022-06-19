@@ -1,0 +1,78 @@
+TODO for 1.0.11:
+- evanescent plane wave in python
+- field generators ?
+
+TODO 1.1:
+- full pyDGM-UI support
+- full python GDM implementation
+
+
+
+Further TODO:
+fixes / tests:
+- test properly chirality!!
+- multipole development: scattering / extinction
+
+
+small fixes / improvements:
+- autoscaling in `visu.structure`: adapt to screen dpi
+- implement more info-printing methods in "simulation" class (field-indices for example)
+
+
+conversion to pure python:
+- LDOS stuff
+- evanescent plane wave field generator
+- improve field generator API
+
+
+add:
+- "HE" farfield-propagator with substrate (Clément?) + add to "farfield"
+- "HE", "HH" near-field propagator with substrate
+
+
+tests:
+- unit-test for propagators
+- unit-tests for every incident field
+- unit-test for "linear" / "nonlinear"
+- unit-test for structures (to guarantee reproducibility)
+- unit-tests for every material class
+- unit-test for tools
+
+
+long-term improvements:
+- fully retarded 1-2-3 propagator?
+- implement 6x6 "super-propagator" (--> magnetic fields inside)
+- 3-layer asymptotic propagators
+
+
+documentation:
+- doc: example with farfield scattering into substrate
+- doc: tutorial turn off interactions between nanostructures
+- doc: example optical chirality
+- doc: example far-field chirality
+- doc: comprehensive explanation of "fieldindex"
+- doc: improve "overview"
+- doc: add some tutorial on structures (+ example of inconsistent geometry)
+- doc: later(?) tutorial anisotropic permittivity (birefringence?)
+
+
+
+
+
+
+
+===========================================
+upload to pipy:
+
+"--universal": py2/3 package
+
+linux: (source and egg)
+
+## build distribution files
+python3 setup.py sdist bdist_egg
+
+## check validity
+twine check dist/*
+
+## upload to pypi
+twine upload FILE(s)
