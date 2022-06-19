@@ -1,0 +1,74 @@
+
+######### ANACONDA 3 (and 2?)
+(0) ---- setup python environment in anaconda navigator ----
+- environments --> create
+- install "conda"
+- open terminal
+
+(1) install compiler:
+conda update conda
+conda install m2w64-toolchain libpython
+
+(2) compile and build windows binary:
+python setup.py build
+python setup.py bdist_wheel
+
+(3) upload to pypi:
+(if required: pip install twine)
+twine upload dist\*
+enter username and passwort.
+
+(4) compile:
+python setup.py build
+python setup.py bdist_wheel
+
+
+
+
+######### LINUX
+
+python setup.py build bdist_egg
+python3 setup.py build bdist_egg
+python3 setup.py build bdist
+
+cd dist
+twine upload DIST_FILE
+
+
+
+
+######### OLD SOLUTION (ANACONDA 2)
+(1) Install compiler:
+conda install mingwpy
+
+
+(2) Make sure to have linker options defined in "setup.py":
+extra_compile_args = ['-fopenmp', '-O3'],
+extra_link_args = ['-lgomp', '-O3', '-lpthread'],
+
+
+(3) Add hard-coded linker options in file 
+"c:\anaconda2\lib\site-packages\numpy\distutils\fcompiler\gnu.py"
+if "def _link_wrapper_lib(...)" around line 430: 
+
+self.link_shared_object(
+            objects,
+            dll_name,
+            output_dir=extra_dll_dir,
+            extra_postargs=list(chained_dlls) + [
+                '-Wl,--allow-multiple-definition',
+                '-Wl,--output-def,' + def_path,
+                '-Wl,--export-all-symbols',
+                '-Wl,--enable-auto-import',
+                '-static',
+                '-mlong-double-64',
+				'-lgomp',
+				'-O3',
+				'-lpthread'
+            ])
+
+
+
+
+
+
